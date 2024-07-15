@@ -1,4 +1,4 @@
-package nl.lelebees;
+package nl.lelebees.boekmanager;
 
 public class Main {
     public static void main(String[] args) {

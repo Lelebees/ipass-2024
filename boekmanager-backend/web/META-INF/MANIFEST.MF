@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: lelebees
+Build-Jdk: Oracle OpenJDK version 17.0.6
+Specification-Title: tomcat-app
+Specification-Version: 0.1
+Implementation-Title: tomcat-app
+Implementation-Version: 0.1
+Implementation-Vendor-Id: nl.lelebees.boekmanager
+
