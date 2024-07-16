@@ -1,4 +1,4 @@
-package nl.lelebees.boekmanager.domain.security;
+package nl.lelebees.boekmanager.security.domain;
 
 import java.security.Principal;
 import java.util.ArrayList;

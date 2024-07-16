@@ -1,6 +1,6 @@
-package nl.lelebees.boekmanager.api.hello;
+package nl.lelebees.boekmanager.hello.api;
 
-import nl.lelebees.boekmanager.api.hello.dto.MessageDTO;
+import nl.lelebees.boekmanager.hello.api.dto.MessageDTO;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

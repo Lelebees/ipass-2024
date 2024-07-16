@@ -4,8 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import nl.lelebees.boekmanager.api.account.AccountController;
-import nl.lelebees.boekmanager.domain.security.Account;
+import nl.lelebees.boekmanager.security.api.AccountController;
+import nl.lelebees.boekmanager.security.domain.Account;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;

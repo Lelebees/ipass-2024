@@ -1,6 +1,6 @@
 package nl.lelebees.boekmanager.security;
 
-import nl.lelebees.boekmanager.domain.security.Account;
+import nl.lelebees.boekmanager.security.domain.Account;
 
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;

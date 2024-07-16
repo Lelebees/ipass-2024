@@ -1,6 +1,6 @@
 package nl.lelebees.boekmanager.jersey;
 
-import nl.lelebees.boekmanager.domain.security.Account;
+import nl.lelebees.boekmanager.security.domain.Account;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
