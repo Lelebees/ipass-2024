@@ -1,15 +1,16 @@
 ```mermaid
 classDiagram 
     direction TB
-    class Boek {
+    class Book {
         -UUID id [get]
         -ISBN ISBN [get]
-        -Naam auteur [get]
-        -String titel [get]
-        -String notities [get]
+        -Name author [get]
+        -String title [get]
+        -String notes [get]
+        +isLoaned() bool
     }
-    Boek "1" --o "1" Lening
-    ISBN "1" <-- "1..*" Boek
+    Book "1" --o "1" Loan
+    ISBN "1" <-- "1..*" Book
     class ISBN {
         <<abstract>>
         -char[] digits
@@ -33,56 +34,59 @@ classDiagram
         +getPrefixElement() char[3]
     }
     ISBN13 --|> ISBN
-    Lening "0..*" -- "1" Lener
-    class Lening {
-        -Boek geleendBoek [get]
-        -LocalDateTime leenMoment [get]
+    Loan "0..*" -- "1" Loaner
+    class Loan {
+        -Book loanedBook [get]
+        -LocalDateTime loanedAt [get]
+        -LocalDateTime toReturnAt [get]
+        -LocalDateTime wasReturnedAt [get]
+        +isLate() bool
     }
-    Boek "1" --o "1" Reservering
-    Reservering "0..*" -- "1" Lener
-    class Reservering {
-        -Boek gereserveerdBoek [get]
-        -LocalDateTime reserveringsMoment [get]
+    Book "1" --o "1" Reservation
+    Reservation "0..*" -- "1" Loaner
+    class Reservation {
+        -Book reservedBook [get]
+        -LocalDateTime reservedAt [get]
     }
-    class Lener {
+    class Loaner {
         -UUID id [get]
-        -Naam naam [get]
-        -Adres adres [get]
+        -Name naam [get]
+        -Adress adres [get]
         -String notities [get]
-        -List~Lening~ leningen [get]
-        -List~Reservering~ reserveringen [get]
+        -List~Loan~ leningen [get]
+        -List~Reservation~ reserveringen [get]
     }
-    Lener "1..*" *-- "1" Adres
-    class Adres {
-        -Huisnummer huisnummer [get]
+    Loaner "1..*" *-- "1" Adress
+    class Adress {
+        -HouseNumber huisnummer [get]
         -String straatNaam [get]
         -String plaatsNaam [get]
         -String provincie [get]
-        -Postcode postcode [get]
+        -PostalCode postcode [get]
     }
-    Adres "1" -- "1" Huisnummer
-    class Huisnummer {
+    Adress "1" -- "1" HouseNumber
+    class HouseNumber {
         -Integer nummer [get]
         -String toevoeging [get]
         +getNummer() Integer
         +getToevoeging() String
         +toString() String
     }
-    Adres "0..*" -- "1" Postcode
-    class Postcode {
+    Adress "0..*" -- "1" PostalCode
+    class PostalCode {
         -char[6] code
         +getRegio() char[2]
         +getWijk() char[2]
         +toString() String
     }
-    class Naam {
+    class Name {
         List~String~ namen [get]
         +getVoornaam() String
         +getAchternaam() String
         +toString() String
     }
-    Boek <-- Naam
-    Lener *-- Naam
+    Book "1" <-- "1" Name : auteur
+    Loaner "1" <-- "1" Name
 ```
 Voor de leesbaarheid zijn getters en setters achterwege gelaten. 
 In plaats daarvan zijn deze zichtbaar gemaakt met `[get, set]`, `[get]` of `[set]` achter de relevante variabele.
