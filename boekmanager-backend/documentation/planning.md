@@ -1,4 +1,7 @@
 ````mermaid
+---
+displayMode: compact
+---
 gantt
     title Planning IPASS-2024 Leon
     dateFormat YYYY-MM-DD
