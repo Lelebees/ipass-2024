@@ -8,9 +8,11 @@ classDiagram
         -String title [get]
         -String notes [get]
         +isLoaned() bool
+        +isReserved() bool
         +getLoaner() Loaner
+        +getFirstReserver() Loaner
     }
-    Book "1" --o "1" Loan
+    Book "1" --o "0..1" Loan
 %%    ISBN "1" --* "1..*" Book
 %%    class ISBN {
 %%        <<abstract>>
@@ -47,7 +49,7 @@ classDiagram
         +returnBook()
         +returnBook(LocalDateTime returnedAt)
     }
-    Book "1" --o "1" Reservation
+    Book "1" --o "0..*" Reservation
     Reservation "0..*" o-- "1" Loaner
     class Reservation {
         -UUID id [get]
@@ -72,6 +74,7 @@ classDiagram
         -String townName [get]
         -String country [get]
         -String postalCode [get]
+        +toString() String
     }
 %%    class Email {
 %%        -String email
@@ -101,14 +104,20 @@ classDiagram
 %%        +toString() String
 %%    }
     class Name {
-        List~String~ names [get]
-        +getFirstName() String
-        +getArticles() String
-        +getSurname() String
+        -String firstName [get]
+        -String middleName [get]
+        -String lastName [get]
         +toString() String
+        +toString(NameOrder order) String
     }
-    Book "1" *-- "1" Name : author
-    Loaner "1" *-- "1" Name
+    class NameOrder {
+        <<enumeration>>
+        FIRST_MIDDLE_LAST
+        LAST_FIRST_MIDDLE
+    }
+    Name ..> NameOrder
+    Book "0..*" *-- "1" Name : author
+    Loaner "0..1" *-- "1" Name
 ```
 Voor de leesbaarheid zijn getters en setters achterwege gelaten. 
 In plaats daarvan zijn deze zichtbaar gemaakt met `[get, set]`, `[get]` of `[set]` achter de relevante variabele.
