@@ -1,10 +1,10 @@
-package nl.lelebees.boekmanager.api.account;
+package nl.lelebees.boekmanager.security.api;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
-import nl.lelebees.boekmanager.domain.security.Account;
+import nl.lelebees.boekmanager.security.domain.Account;
 import nl.lelebees.boekmanager.security.CredentialHolder;
 
 import javax.annotation.security.RolesAllowed;
