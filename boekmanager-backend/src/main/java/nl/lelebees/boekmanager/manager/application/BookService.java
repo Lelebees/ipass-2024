@@ -6,6 +6,7 @@ import nl.lelebees.boekmanager.manager.domain.book.Book;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
 
+import java.util.List;
 import java.util.UUID;
 
 public class BookService {
@@ -25,5 +26,9 @@ public class BookService {
 
     public BookDTO createBook(CreateBookDTO bookDTO) throws NoTitleEnteredException {
         return BookDTO.from(new Book(bookDTO.ISBN(), bookDTO.author(), bookDTO.title(), bookDTO.notes()));
+    }
+
+    public List<BookDTO> getAllBooks() {
+        return BookDTO.listFrom(Book.getAllBooks());
     }
 }

@@ -48,4 +48,10 @@ public class BookController {
         }
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllBooks() {
+        return Response.ok(service.getAllBooks()).build();
+    }
+
 }
