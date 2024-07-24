@@ -4,6 +4,7 @@ import nl.lelebees.boekmanager.manager.api.dto.BookDTO;
 import nl.lelebees.boekmanager.manager.api.dto.CreateBookDTO;
 import nl.lelebees.boekmanager.manager.application.BookService;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
+import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,8 +40,12 @@ public class BookController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createBook(CreateBookDTO bookDTO) {
-        BookDTO book = service.createBook(bookDTO);
-        return Response.created(URI.create("./" + "/books/" + book.id())).entity(book).build();
+        try {
+            BookDTO book = service.createBook(bookDTO);
+            return Response.created(URI.create("./" + "/books/" + book.id())).entity(book).build();
+        } catch (NoTitleEnteredException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("The Book title is null!").build();
+        }
     }
 
 }

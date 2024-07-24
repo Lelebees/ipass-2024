@@ -1,6 +1,7 @@
 package nl.lelebees.boekmanager.manager.domain.book;
 
 import nl.lelebees.boekmanager.manager.domain.Name;
+import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 
 import java.util.ArrayList;
@@ -16,16 +17,19 @@ public class Book {
 
     private static final List<Book> allBooks = new ArrayList<>();
 
-    protected Book(UUID id, String ISBN, Name author, String title, String notes) {
+    protected Book(UUID id, String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
         this.id = id;
         this.ISBN = ISBN;
         this.author = author;
+        if (title == null) {
+            throw new NoTitleEnteredException("Title is null!");
+        }
         this.title = title;
         this.notes = notes;
         allBooks.add(this);
     }
 
-    public Book(String ISBN, Name author, String title, String notes) {
+    public Book(String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
         this(UUID.randomUUID(), ISBN, author, title, notes);
     }
 
