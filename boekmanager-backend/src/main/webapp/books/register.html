@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registreer Boek</title>
+    <link rel="stylesheet" href="register/register.css">
+</head>
+<body>
+<h1>Registreer Boek</h1>
+<form name="registerBook">
+    <div>
+        <label for="titleInput">Titel</label>
+        <input id="titleInput" type="text">
+    </div>
+    <div>
+        <label for="ISBNInput">ISBN</label>
+        <input id="ISBNInput" type="text">
+    </div>
+    <div>
+        <label>Auteur</label>
+        <label for="authorFirstNameInput" hidden aria-hidden="false">Voornaam</label>
+        <input id="authorFirstNameInput"
+               type="text"
+               placeholder="Voornaam">
+        <label for="authorMiddleNameInput" hidden aria-hidden="false">Tussenvoegsels</label>
+        <input id="authorMiddleNameInput" type="text" placeholder="Tussenvoegsels">
+        <label for="authorLastNameInput" hidden aria-hidden="false">Achternaam</label>
+        <input id="authorLastNameInput"
+               type="text"
+               placeholder="Achternaam">
+    </div>
+    <div>
+        <label for="notesInput">Notities</label>
+        <textarea id="notesInput"></textarea>
+    </div>
+    <input type="submit">
+</form>
+<script src="register/register.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+form {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
