@@ -55,7 +55,7 @@ textarea {
     grid-area: notesLabel;
 }
 
-div {
+body {
     display: grid;
     grid-template-rows: auto auto;
     place-items: center;

@@ -1,4 +1,4 @@
-export default class RegisterBookService {
+export default class BookService {
     registerBook(title, ISBN, firstName, middleName, lastName, notes) {
         return fetch("../api/books", {
             method: "POST",

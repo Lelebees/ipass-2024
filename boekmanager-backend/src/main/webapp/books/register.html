@@ -6,29 +6,28 @@
     <link rel="stylesheet" href="register/register.css">
 </head>
 <body>
-<div>
-    <h1>Registreer Boek</h1>
+<h1>Registreer Boek</h1>
 
-    <form name="registerBook">
-        <label for="titleInput" class="titleLabel">Titel</label>
-        <input id="titleInput" type="text" class="titleInput" placeholder="Titel van het boek" required>
+<form name="registerBook">
+    <label for="titleInput" class="titleLabel">Titel</label>
+    <input id="titleInput" type="text" class="titleInput" placeholder="Titel van het boek" required>
 
-        <label for="ISBNInput" class="ISBNLabel">ISBN</label>
-        <input id="ISBNInput" type="text" class="ISBNInput" placeholder="ISB-Nummer. e.g. '978-3-16-148410-0'">
+    <label for="ISBNInput" class="ISBNLabel">ISBN</label>
+    <input id="ISBNInput" type="text" class="ISBNInput" placeholder="ISB-Nummer. e.g. '978-3-16-148410-0'">
 
-        <label class="authorLabel">Auteur</label>
-        <label for="authorFirstNameInput" hidden aria-hidden="false">Voornaam</label>
-        <input id="authorFirstNameInput" type="text" placeholder="Voornaam" class="firstNameInput">
-        <label for="authorMiddleNameInput" hidden aria-hidden="false">Tussenvoegsels</label>
-        <input id="authorMiddleNameInput" type="text" placeholder="Tussenvoegsels" class="middleNameInput">
-        <label for="authorLastNameInput" hidden aria-hidden="false">Achternaam</label>
-        <input id="authorLastNameInput" type="text" placeholder="Achternaam" class="lastNameInput">
+    <label class="authorLabel">Auteur</label>
+    <label for="authorFirstNameInput" hidden aria-hidden="false">Voornaam</label>
+    <input id="authorFirstNameInput" type="text" placeholder="Voornaam" class="firstNameInput">
+    <label for="authorMiddleNameInput" hidden aria-hidden="false">Tussenvoegsels</label>
+    <input id="authorMiddleNameInput" type="text" placeholder="Tussenvoegsels" class="middleNameInput">
+    <label for="authorLastNameInput" hidden aria-hidden="false">Achternaam</label>
+    <input id="authorLastNameInput" type="text" placeholder="Achternaam" class="lastNameInput">
 
-        <label for="notesInput" class="notesLabel">Notities</label>
-        <textarea id="notesInput" placeholder="bijvoorbeeld 'hardcover uitgave'"></textarea>
-        <input type="submit" class="submitButton" value="Registreer Boek">
-    </form>
-</div>
+    <label for="notesInput" class="notesLabel">Notities</label>
+    <textarea id="notesInput" placeholder="bijvoorbeeld 'hardcover uitgave'"></textarea>
+    <input type="submit" class="submitButton" value="Registreer Boek">
+</form>
+
 <script src="register/register.js" type="module"></script>
 </body>
 </html>

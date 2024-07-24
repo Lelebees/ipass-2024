@@ -1,6 +1,6 @@
-import RegisterBookService from "./registerBookService.js";
+import BookService from "../bookService.js";
 
-let service = new RegisterBookService()
+let service = new BookService()
 document.forms.registerBook.addEventListener('submit', e => {
     e.preventDefault();
     let form = document.forms.registerBook
