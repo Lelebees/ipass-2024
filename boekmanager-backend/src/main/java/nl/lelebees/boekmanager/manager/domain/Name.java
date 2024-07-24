@@ -1,6 +1,6 @@
 package nl.lelebees.boekmanager.manager.domain;
 
-import static nl.lelebees.boekmanager.manager.domain.NameOrder.FIRST_MIDDLE_LAST;
+import static nl.lelebees.boekmanager.manager.domain.NameFormat.FIRST_MIDDLE_LAST;
 
 public record Name(String firstName, String middleName, String lastName) {
 
@@ -9,8 +9,8 @@ public record Name(String firstName, String middleName, String lastName) {
         return this.toString(FIRST_MIDDLE_LAST);
     }
 
-    public String toString(NameOrder order) {
-        return switch (order) {
+    public String toString(NameFormat format) {
+        return switch (format) {
             case FIRST_MIDDLE_LAST -> firstName + " " + middleName + " " + lastName;
             case LAST_FIRST_MIDDLE -> lastName + ", " + firstName + " " + middleName;
         };

@@ -16,13 +16,17 @@ public class Book {
 
     private static final List<Book> allBooks = new ArrayList<>();
 
-    public Book(UUID id, String ISBN, Name author, String title, String notes) {
+    protected Book(UUID id, String ISBN, Name author, String title, String notes) {
         this.id = id;
         this.ISBN = ISBN;
         this.author = author;
         this.title = title;
         this.notes = notes;
         allBooks.add(this);
+    }
+
+    public Book(String ISBN, Name author, String title, String notes) {
+        this(UUID.randomUUID(), ISBN, author, title, notes);
     }
 
     public UUID getId() {
