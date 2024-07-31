@@ -1,4 +1,4 @@
-package nl.lelebees.boekmanager.manager.api.dto;
+package nl.lelebees.boekmanager.manager.api.book.dto;
 
 import nl.lelebees.boekmanager.manager.domain.name.Name;
 import nl.lelebees.boekmanager.manager.domain.book.Book;

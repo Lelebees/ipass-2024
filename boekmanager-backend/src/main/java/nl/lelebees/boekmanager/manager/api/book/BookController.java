@@ -1,7 +1,7 @@
-package nl.lelebees.boekmanager.manager.api;
+package nl.lelebees.boekmanager.manager.api.book;
 
-import nl.lelebees.boekmanager.manager.api.dto.BookDTO;
-import nl.lelebees.boekmanager.manager.api.dto.CreateBookDTO;
+import nl.lelebees.boekmanager.manager.api.book.dto.BookDTO;
+import nl.lelebees.boekmanager.manager.api.book.dto.CreateBookDTO;
 import nl.lelebees.boekmanager.manager.application.BookService;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
