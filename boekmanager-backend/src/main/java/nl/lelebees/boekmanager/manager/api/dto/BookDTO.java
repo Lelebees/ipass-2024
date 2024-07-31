@@ -1,6 +1,6 @@
 package nl.lelebees.boekmanager.manager.api.dto;
 
-import nl.lelebees.boekmanager.manager.domain.Name;
+import nl.lelebees.boekmanager.manager.domain.name.Name;
 import nl.lelebees.boekmanager.manager.domain.book.Book;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package nl.lelebees.boekmanager.manager.domain;
+package nl.lelebees.boekmanager.manager.domain.name;
 
-import static nl.lelebees.boekmanager.manager.domain.NameFormat.FIRST_MIDDLE_LAST;
+import static nl.lelebees.boekmanager.manager.domain.name.NameFormat.FIRST_MIDDLE_LAST;
 
 public record Name(String firstName, String middleName, String lastName) {
 

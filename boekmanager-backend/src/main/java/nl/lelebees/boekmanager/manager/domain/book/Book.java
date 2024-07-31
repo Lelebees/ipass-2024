@@ -1,6 +1,6 @@
 package nl.lelebees.boekmanager.manager.domain.book;
 
-import nl.lelebees.boekmanager.manager.domain.Name;
+import nl.lelebees.boekmanager.manager.domain.name.Name;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 
@@ -9,13 +9,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class Book {
-    private UUID id;
+    private final UUID id;
     private String ISBN;
     private Name author;
     private String title;
     private String notes;
-
-    private static final List<Book> allBooks = new ArrayList<>();
 
     protected Book(UUID id, String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
         this.id = id;
@@ -26,7 +24,6 @@ public class Book {
         }
         this.title = title;
         this.notes = notes;
-        allBooks.add(this);
     }
 
     public Book(String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
@@ -67,9 +64,5 @@ public class Book {
 
     public Loaner getFirstReserver() {
         throw new RuntimeException("Method not implemented");
-    }
-
-    public static List<Book> getAllBooks() {
-        return Book.allBooks;
     }
 }
