@@ -1,5 +1,6 @@
 package nl.lelebees.boekmanager.manager.domain.book;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.lelebees.boekmanager.manager.domain.Entity;
 import nl.lelebees.boekmanager.manager.domain.name.Name;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Book extends Entity<UUID> {
+    @JsonProperty("isbn")
     private String ISBN;
     private Name author;
     private String title;
@@ -28,6 +30,10 @@ public class Book extends Entity<UUID> {
 
     public Book(String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
         this(UUID.randomUUID(), ISBN, author, title, notes);
+    }
+
+    protected Book(){
+//        super();
     }
 
     public String getISBN() {

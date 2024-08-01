@@ -1,7 +1,11 @@
 package nl.lelebees.boekmanager.manager.domain;
 
 public abstract class Entity<ID> {
-    private final ID id;
+    private ID id;
+
+    protected Entity() {
+        // Jackson?
+    }
 
     public Entity(ID id) {
         this.id = id;
