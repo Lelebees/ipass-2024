@@ -2,7 +2,7 @@ package nl.lelebees.boekmanager.manager.application;
 
 import nl.lelebees.boekmanager.manager.api.loaner.dto.CreateLoanerDTO;
 import nl.lelebees.boekmanager.manager.api.loaner.dto.LoanerDTO;
-import nl.lelebees.boekmanager.manager.data.loaner.CSVLoanerRepository;
+import nl.lelebees.boekmanager.manager.data.loaner.JSONLoanerRepository;
 import nl.lelebees.boekmanager.manager.data.loaner.LoanerRepository;
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 import nl.lelebees.boekmanager.manager.domain.loaner.exception.LoanerNotFoundException;
@@ -19,7 +19,7 @@ public class LoanerService {
     }
 
     public LoanerService() {
-        this(new CSVLoanerRepository());
+        this(new JSONLoanerRepository());
     }
 
     public LoanerDTO getLoaner(UUID id) throws LoanerNotFoundException {

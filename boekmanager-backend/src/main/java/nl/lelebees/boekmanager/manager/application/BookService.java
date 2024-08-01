@@ -3,7 +3,7 @@ package nl.lelebees.boekmanager.manager.application;
 import nl.lelebees.boekmanager.manager.api.book.dto.BookDTO;
 import nl.lelebees.boekmanager.manager.api.book.dto.CreateBookDTO;
 import nl.lelebees.boekmanager.manager.data.book.BookRepository;
-import nl.lelebees.boekmanager.manager.data.book.CSVBookRepository;
+import nl.lelebees.boekmanager.manager.data.book.JSONBookRepository;
 import nl.lelebees.boekmanager.manager.domain.book.Book;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
@@ -21,7 +21,7 @@ public class BookService {
     }
 
     public BookService() {
-        this(new CSVBookRepository());
+        this(new JSONBookRepository());
     }
 
     public BookDTO getBook(UUID bookId) throws BookNotFoundException {
