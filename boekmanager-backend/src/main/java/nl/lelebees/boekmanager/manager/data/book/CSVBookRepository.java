@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class CSVBookRepository implements BookRepository{
-    private List<Book> allBooks;
+    private final List<Book> allBooks = new ArrayList<>();
     @Override
     public Optional<Book> findById(UUID uuid) {
         for (Book book : allBooks) {
