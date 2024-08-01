@@ -1,14 +1,14 @@
 package nl.lelebees.boekmanager.manager.api.loaner;
 
+import nl.lelebees.boekmanager.manager.api.loaner.dto.CreateLoanerDTO;
+import nl.lelebees.boekmanager.manager.api.loaner.dto.LoanerDTO;
 import nl.lelebees.boekmanager.manager.application.LoanerService;
 import nl.lelebees.boekmanager.manager.domain.loaner.exception.LoanerNotFoundException;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.UUID;
 
 @Path("/loaners")
@@ -33,5 +33,14 @@ public class LoanerController {
         } catch (LoanerNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity("Could not find Loaner with id: " + loanerId).build();
         }
+    }
+
+    @POST
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createLoaner(CreateLoanerDTO dto) {
+        LoanerDTO loaner = service.createLoaner(dto);
+        return Response.created(URI.create("./" + "/loaners/" + loaner.id())).entity(loaner).build();
     }
 }
