@@ -1,10 +1,10 @@
-package nl.lelebees.boekmanager.manager.data.book;
+package nl.lelebees.boekmanager.manager.data.loaner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.lelebees.boekmanager.manager.data.JSONRepository;
-import nl.lelebees.boekmanager.manager.domain.book.Book;
+import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class JSONBookRepository extends JSONRepository<Book, UUID> implements BookRepository {
+public class JSONLoanerRepository extends JSONRepository<Loaner, UUID> implements LoanerRepository {
 
     private final ObjectMapper mapper;
-    private final String url = "Book.json";
+    private final String url = "Loaner.json";
     private final Path path = Paths.get(url);
 
-    public JSONBookRepository() {
+    public JSONLoanerRepository() {
         super();
         this.mapper = new ObjectMapper();
         if (!Files.exists(path)) {
@@ -31,23 +31,23 @@ public class JSONBookRepository extends JSONRepository<Book, UUID> implements Bo
                 throw new RuntimeException("Could not create File for saving Books: " + e.getMessage(), e);
             }
         }
-        List<Book> books;
+        List<Loaner> loaners;
         try {
             String content = Files.readString(path);
-            books = mapper.readValue(content, new TypeReference<>() {
+            loaners = mapper.readValue(content, new TypeReference<>() {
             });
         } catch (JsonProcessingException e) {
             System.out.println("Something went wrong parsing JSON!");
             System.out.println(e);
-            books = new ArrayList<>();
+            loaners = new ArrayList<>();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        super.allTypes.addAll(books);
+        super.allTypes.addAll(loaners);
     }
 
     @Override
-    public Book save(Book entity) {
+    public Loaner save(Loaner entity) {
         super.save(entity);
         try {
             String text = mapper.writeValueAsString(super.allTypes);
@@ -61,7 +61,7 @@ public class JSONBookRepository extends JSONRepository<Book, UUID> implements Bo
     }
 
     @Override
-    public List<Book> getAllBooks() {
+    public List<Loaner> getAllLoaners() {
         return new ArrayList<>(super.allTypes);
     }
 }
