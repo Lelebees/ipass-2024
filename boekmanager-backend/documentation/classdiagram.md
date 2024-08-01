@@ -108,14 +108,14 @@ classDiagram
         -String middleName [get]
         -String lastName [get]
         +toString() String
-        +toString(NameOrder order) String
+        +toString(NameFormat format) String
     }
-    class NameOrder {
+    class NameFormat {
         <<enumeration>>
         FIRST_MIDDLE_LAST
         LAST_FIRST_MIDDLE
     }
-    Name ..> NameOrder
+    Name ..> NameFormat
     Book "0..*" *-- "1" Name : author
     Loaner "0..1" *-- "1" Name
 ```

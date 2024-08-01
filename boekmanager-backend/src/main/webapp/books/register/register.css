@@ -1,0 +1,70 @@
+form {
+    display: grid;
+    grid-template-areas:
+            "titleLabel titleInput titleInput titleInput"
+            "ISBNLabel ISBNInput ISBNInput ISBNInput"
+            "authorLabel firstNameInput middleNameInput lastNameInput"
+            "notesLabel notesInput notesInput notesInput"
+            ". . submit .";
+    width: 50%;
+    grid-column-gap: 3px;
+    grid-row-gap: 3px;
+}
+
+.submitButton {
+    grid-area: submit;
+}
+
+textarea {
+    grid-area: notesInput;
+}
+
+.titleLabel {
+    grid-area: titleLabel;
+}
+
+.titleInput {
+    grid-area: titleInput;
+}
+
+.ISBNLabel {
+    grid-area: ISBNLabel;
+}
+
+.ISBNInput {
+    grid-area: ISBNInput;
+}
+
+.authorLabel {
+    grid-area: authorLabel;
+}
+
+.firstNameInput{
+    grid-area: firstNameInput;
+}
+
+.middleNameInput {
+    grid-area: middleNameInput;
+}
+
+.lastNameInput {
+    grid-area: lastNameInput;
+}
+
+.notesLabel {
+    grid-area: notesLabel;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto auto;
+    place-items: center;
+    grid-gap: 5px;
+}
+
+h1 {
+    margin:auto;
+    text-align: center;
+    width: 99%;
+}
+
