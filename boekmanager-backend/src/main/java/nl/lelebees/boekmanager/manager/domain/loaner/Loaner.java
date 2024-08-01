@@ -1,13 +1,13 @@
 package nl.lelebees.boekmanager.manager.domain.loaner;
 
+import nl.lelebees.boekmanager.manager.domain.Entity;
 import nl.lelebees.boekmanager.manager.domain.loan.Loan;
 import nl.lelebees.boekmanager.manager.domain.name.Name;
 
 import java.util.List;
 import java.util.UUID;
 
-public class Loaner {
-    private final UUID id;
+public class Loaner extends Entity<UUID> {
     private Name name;
     private Address address;
     private String email;
@@ -16,7 +16,7 @@ public class Loaner {
 
 
     private Loaner(UUID id, Name name, Address address, String email, String phoneNumber, String notes) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.address = address;
         this.email = email;
@@ -30,10 +30,6 @@ public class Loaner {
 
     public List<Loan> getLoans() {
         throw new RuntimeException("Not implemented");
-    }
-
-    public UUID getId() {
-        return this.id;
     }
 
     public Name getName() {
