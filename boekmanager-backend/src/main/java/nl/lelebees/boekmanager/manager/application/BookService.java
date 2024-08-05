@@ -33,7 +33,7 @@ public class BookService {
     }
 
     public List<BookDTO> getAllBooks() {
-        return BookDTO.listFrom(repository.getAllBooks());
+        return BookDTO.from(repository.getAllBooks());
     }
 
     public Book findBook(UUID bookId) throws BookNotFoundException {
@@ -42,5 +42,9 @@ public class BookService {
             throw new BookNotFoundException("Could not find Book with id: " + bookId);
         }
         return bookOptional.get();
+    }
+
+    public List<BookDTO> getBooksByAuthor(String authorQuery) {
+        return BookDTO.from(repository.getBooksByAuthor(authorQuery));
     }
 }

@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface BookRepository extends Repository<Book, UUID> {
     List<Book> getAllBooks();
+
+    List<Book> getBooksByAuthor(String author);
 }

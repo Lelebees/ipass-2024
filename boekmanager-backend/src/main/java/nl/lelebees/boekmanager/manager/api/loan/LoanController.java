@@ -42,30 +42,24 @@ public class LoanController {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public Response getLoans() {
+    public Response getLoans(@QueryParam("loaner") UUID loanerId, @QueryParam("book") UUID bookId) {
+        if (loanerId != null) {
+            try {
+                return Response.ok(service.getLoansByLoaner(loanerId)).build();
+            } catch (LoanerNotFoundException e) {
+                return Response.status(NOT_FOUND).entity("Could not find Loans for Loaner with id:" + loanerId + ". Loaner could not be found.").build();
+            }
+        }
+        if (bookId != null) {
+            try {
+                return Response.ok(service.getLoanByBook(bookId)).build();
+            } catch (BookNotFoundException e) {
+                return Response.status(NOT_FOUND).entity("Could not find Loan for Book with id:" + bookId + ". Book could not be found.").build();
+            } catch (LoanNotFoundException e) {
+                return Response.status(NOT_FOUND).entity("Could not find Loan for Book with id:" + bookId + ". The Book has no Loan associated.").build();
+            }
+        }
         return Response.ok(service.getAllLoans()).build();
-    }
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public Response getLoansByLoaner(@QueryParam("loaner") UUID loanerId) {
-        try {
-            return Response.ok(service.getLoansByLoaner(loanerId)).build();
-        } catch (LoanerNotFoundException e) {
-            return Response.status(NOT_FOUND).entity("Could not find Loans for Loaner with id:" + loanerId + ". Loaner could not be found.").build();
-        }
-    }
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public Response getLoanByBook(@QueryParam("book") UUID bookId) {
-        try {
-            return Response.ok(service.getLoanByBook(bookId)).build();
-        } catch (BookNotFoundException e) {
-            return Response.status(NOT_FOUND).entity("Could not find Loan for Book with id:" + bookId + ". Book could not be found.").build();
-        } catch (LoanNotFoundException e) {
-            return Response.status(NOT_FOUND).entity("Could not find Loan for Book with id:" + bookId + ". The Book has no Loan associated.").build();
-        }
     }
 
     @POST

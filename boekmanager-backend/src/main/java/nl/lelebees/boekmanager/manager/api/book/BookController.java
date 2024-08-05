@@ -54,7 +54,10 @@ public class BookController {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public Response getAllBooks() {
+    public Response getAllBooks(@QueryParam("author") String authorQuery) {
+        if (authorQuery != null) {
+            return Response.ok(service.getBooksByAuthor(authorQuery)).build();
+        }
         return Response.ok(service.getAllBooks()).build();
     }
 

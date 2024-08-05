@@ -37,7 +37,6 @@ public class LoanerController {
     }
 
     @POST
-    @Path("/")
     @Produces(APPLICATION_JSON)
     @Consumes(APPLICATION_JSON)
     public Response createLoaner(CreateLoanerDTO dto) {
@@ -47,7 +46,10 @@ public class LoanerController {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public Response getAllLoaners() {
+    public Response getAllLoaners(@QueryParam("name") String name) {
+        if (name != null) {
+            return Response.ok(service.getLoanersByName(name)).build();
+        }
         return Response.ok(service.getAllLoaners()).build();
     }
 }

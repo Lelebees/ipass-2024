@@ -13,7 +13,7 @@ public record BookDTO(UUID id, String ISBN, Name author, String title, String no
         return new BookDTO(book.getId(), book.getISBN(), book.getAuthor(), book.getTitle(), book.getNotes(), false);
     }
 
-    public static List<BookDTO> listFrom(List<Book> allBooks) {
+    public static List<BookDTO> from(List<Book> allBooks) {
         List<BookDTO> bookDTOList = new ArrayList<>();
         for (Book book : allBooks) {
             bookDTOList.add(BookDTO.from(book));

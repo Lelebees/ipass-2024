@@ -31,7 +31,7 @@ public class LoanerService {
     }
 
     public List<LoanerDTO> getAllLoaners() {
-        return LoanerDTO.fromList(repository.getAllLoaners());
+        return LoanerDTO.from(repository.getAllLoaners());
     }
 
     public Loaner findLoaner(UUID id) throws LoanerNotFoundException {
@@ -40,5 +40,9 @@ public class LoanerService {
             throw new LoanerNotFoundException("Could not find Loaner with id: " + id);
         }
         return loanerOptional.get();
+    }
+
+    public List<LoanerDTO> getLoanersByName(String name){
+        return LoanerDTO.from(repository.getLoanersByName(name));
     }
 }

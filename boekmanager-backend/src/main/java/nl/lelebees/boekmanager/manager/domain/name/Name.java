@@ -10,6 +10,12 @@ public record Name(String firstName, String middleName, String lastName) {
     }
 
     public String toString(NameFormat format) {
+        if (middleName.isEmpty()) {
+            return switch (format) {
+                case FIRST_MIDDLE_LAST -> firstName + " " + lastName;
+                case LAST_FIRST_MIDDLE -> lastName + ", " + firstName;
+            };
+        }
         return switch (format) {
             case FIRST_MIDDLE_LAST -> firstName + " " + middleName + " " + lastName;
             case LAST_FIRST_MIDDLE -> lastName + ", " + firstName + " " + middleName;
