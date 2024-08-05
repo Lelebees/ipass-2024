@@ -1,15 +1,15 @@
 package nl.lelebees.boekmanager.manager.domain.loan;
 
+import nl.lelebees.boekmanager.manager.domain.Entity;
 import nl.lelebees.boekmanager.manager.domain.book.Book;
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Loan {
-    private final UUID id;
-    private final Book book;
-    private final Loaner loaner;
+public class Loan extends Entity<UUID> {
+    private Book book;
+    private Loaner loaner;
     private LocalDateTime loanedAt;
     private LocalDateTime toReturnAt;
     private LocalDateTime returnedAt;
@@ -19,12 +19,22 @@ public class Loan {
     }
 
     protected Loan(UUID id, Book book, Loaner loaner, LocalDateTime loanedAt, LocalDateTime toReturnAt, LocalDateTime returnedAt) {
-        this.id = id;
+        super(id);
         this.book = book;
         this.loaner = loaner;
+        if (loanedAt == null) {
+            throw new IllegalStateException("You must enter a date to loan the book at!");
+        }
         this.loanedAt = loanedAt;
+        if (toReturnAt.isBefore(loanedAt)) {
+            throw new IllegalStateException("Book cannot be returned before it is loaned!");
+        }
         this.toReturnAt = toReturnAt;
         this.returnedAt = returnedAt;
+    }
+
+    protected Loan() {
+
     }
 
     public boolean isLate() {
@@ -37,10 +47,6 @@ public class Loan {
 
     public void returnBook(LocalDateTime returnedAt) {
         this.returnedAt = returnedAt;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public Book getBook() {

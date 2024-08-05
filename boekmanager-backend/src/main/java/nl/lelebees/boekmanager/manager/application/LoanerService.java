@@ -34,7 +34,7 @@ public class LoanerService {
         return LoanerDTO.fromList(repository.getAllLoaners());
     }
 
-    private Loaner findLoaner(UUID id) throws LoanerNotFoundException {
+    public Loaner findLoaner(UUID id) throws LoanerNotFoundException {
         Optional<Loaner> loanerOptional = repository.findById(id);
         if (loanerOptional.isEmpty()) {
             throw new LoanerNotFoundException("Could not find Loaner with id: " + id);

@@ -2,6 +2,7 @@ package nl.lelebees.boekmanager.manager.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import nl.lelebees.boekmanager.manager.domain.Entity;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
         this.allTypes = allTypes;
         this.clazz = clazz;
         this.path = Paths.get(clazz.getSimpleName() + ".json");
-        this.mapper = new ObjectMapper();
+        this.mapper = new ObjectMapper().findAndRegisterModules();
         if (!Files.exists(path)) {
             try {
                 Files.createFile(path);

@@ -18,6 +18,9 @@ public class Loaner extends Entity<UUID> {
     private Loaner(UUID id, Name name, Address address, String email, String phoneNumber, String notes) {
         super(id);
         this.name = name;
+        if (name == null) {
+            throw new IllegalStateException("Loaner must have a name!");
+        }
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -28,8 +31,8 @@ public class Loaner extends Entity<UUID> {
         this(UUID.randomUUID(), name, address, email, phoneNumber, notes);
     }
 
-    public List<Loan> getLoans() {
-        throw new RuntimeException("Not implemented");
+    protected Loaner() {
+
     }
 
     public Name getName() {

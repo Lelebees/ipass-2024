@@ -36,7 +36,7 @@ public class BookService {
         return BookDTO.listFrom(repository.getAllBooks());
     }
 
-    private Book findBook(UUID bookId) throws BookNotFoundException {
+    public Book findBook(UUID bookId) throws BookNotFoundException {
         Optional<Book> bookOptional = repository.findById(bookId);
         if (bookOptional.isEmpty()) {
             throw new BookNotFoundException("Could not find Book with id: " + bookId);

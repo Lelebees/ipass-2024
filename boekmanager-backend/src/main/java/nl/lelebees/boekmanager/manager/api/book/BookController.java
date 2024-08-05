@@ -12,6 +12,10 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.UUID;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+
 @Path("/books")
 public class BookController {
 
@@ -27,29 +31,29 @@ public class BookController {
 
     @GET
     @Path("/{bookId}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
     public Response getBookByID(@PathParam("bookId") UUID bookId) {
         try {
             return Response.ok(service.getBook(bookId)).build();
         } catch (BookNotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Could not find Book with id: " + bookId).build();
+            return Response.status(NOT_FOUND).entity("Could not find Book with id: " + bookId).build();
         }
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    @Consumes(APPLICATION_JSON)
     public Response createBook(CreateBookDTO bookDTO) {
         try {
             BookDTO book = service.createBook(bookDTO);
             return Response.created(URI.create("./" + "/books/" + book.id())).entity(book).build();
         } catch (NoTitleEnteredException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("The Book title is null!").build();
+            return Response.status(BAD_REQUEST).entity("The Book title is null!").build();
         }
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
     public Response getAllBooks() {
         return Response.ok(service.getAllBooks()).build();
     }
