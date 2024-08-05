@@ -5,6 +5,7 @@ import nl.lelebees.boekmanager.manager.api.loan.dto.LoanDTO;
 import nl.lelebees.boekmanager.manager.data.loan.JSONLoanRepository;
 import nl.lelebees.boekmanager.manager.data.loan.LoanRepository;
 import nl.lelebees.boekmanager.manager.domain.book.Book;
+import nl.lelebees.boekmanager.manager.domain.book.exception.BookAlreadyLoanedException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.loan.Loan;
 import nl.lelebees.boekmanager.manager.domain.loan.exception.LoanNotFoundException;
@@ -64,10 +65,13 @@ public class LoanService {
         return LoanDTO.from(loan);
     }
 
-    public LoanDTO createLoan(CreateLoanDTO dto) throws BookNotFoundException, LoanerNotFoundException {
+    public LoanDTO createLoan(CreateLoanDTO dto) throws BookNotFoundException, LoanerNotFoundException, BookAlreadyLoanedException {
         Book book = bookService.findBook(dto.bookId());
         Loaner loaner = loanerService.findLoaner(dto.loanerId());
-        Loan loan = new Loan(book, loaner, dto.loanedAt(), dto.toReturnAt(), null);
-        return LoanDTO.from(repository.save(loan));
+        Optional<Loan> loanOptional = repository.getLoanByBook(dto.bookId());
+        if (loanOptional.isPresent()) {
+            throw new BookAlreadyLoanedException("Book with id:" + dto.bookId() + " is already loaned to Loaner with id:" + loanOptional.get().getLoaner().getId() + " in Loan with id:" + loanOptional.get().getId());
+        }
+        return LoanDTO.from(repository.save(new Loan(book, loaner, dto.loanedAt(), dto.toReturnAt(), null)));
     }
 }

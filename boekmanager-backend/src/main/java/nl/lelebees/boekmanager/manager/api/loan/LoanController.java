@@ -3,6 +3,7 @@ package nl.lelebees.boekmanager.manager.api.loan;
 import nl.lelebees.boekmanager.manager.api.loan.dto.CreateLoanDTO;
 import nl.lelebees.boekmanager.manager.api.loan.dto.LoanDTO;
 import nl.lelebees.boekmanager.manager.application.LoanService;
+import nl.lelebees.boekmanager.manager.domain.book.exception.BookAlreadyLoanedException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.loan.exception.LoanNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.loaner.exception.LoanerNotFoundException;
@@ -13,7 +14,7 @@ import java.net.URI;
 import java.util.UUID;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
+import static javax.ws.rs.core.Response.Status.CONFLICT;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 @Path("/loans")
@@ -78,6 +79,8 @@ public class LoanController {
             return Response.status(NOT_FOUND).entity("Could not create Loan. Book with id: " + dto.bookId() + " could not be found.").build();
         } catch (LoanerNotFoundException e) {
             return Response.status(NOT_FOUND).entity("Could not create Loan. Loaner with id: " + dto.loanerId() + " could not be found.").build();
+        } catch (BookAlreadyLoanedException e) {
+            return Response.status(CONFLICT).entity("Could not create Loan. The book with id:" + dto.bookId() + " is already loaned.").build();
         }
     }
 }
