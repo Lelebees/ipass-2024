@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registreer Lener</title>
+  <link rel="stylesheet" href="register/register.css">
+</head>
+<body>
+<h1>Registreer Lener</h1>
+
+<form name="registerLoaner">
+  <label class="nameLabel">Naam</label>
+  <label for="firstNameInput" hidden aria-hidden="false">Voornaam</label>
+  <input id="firstNameInput" type="text" placeholder="Voornaam" class="firstNameInput">
+  <label for="middleNameInput" hidden aria-hidden="false">Tussenvoegsels</label>
+  <input id="middleNameInput" type="text" placeholder="Tussenvoegsels" class="middleNameInput">
+  <label for="lastNameInput" hidden aria-hidden="false">Achternaam</label>
+  <input id="lastNameInput" type="text" placeholder="Achternaam" class="lastNameInput">
+
+
+  <label for="emailInput" class="emailLabel">E-mail</label>
+  <input id="emailInput" type="text" class="emailInput" placeholder="E-mailadres">
+
+  <label for="phoneInput" class="phoneLabel">Telefoonnummer</label>
+  <input id="phoneInput" type="tel" class="phoneInput" placeholder="Telefoonnummer">
+
+  <label class="adressLabel">Adres</label>
+  <input id="streetInput" type="text" class="streetInput" placeholder="Straat">
+  <input id="houseNumberInput" type="text" class="houseNumberInput" placeholder="Huisnummer">
+  <input id="postalCodeInput" type="text" class="postalCodeInput" placeholder="Postcode">
+  <input id="townInput" type="text" class="townInput" placeholder="Plaats">
+  <input id="countryInput" type="text" class="countryInput" placeholder="Land">
+
+
+  <label for="notesInput" class="notesLabel">Notities</label>
+  <textarea id="notesInput" placeholder="bijvoorbeeld 'Broer van Gert'"></textarea>
+
+  <input type="submit" class="submitButton" value="Registreer Lener">
+</form>
+
+<script src="register/register.js" type="module"></script>
+</body>
+</html>
