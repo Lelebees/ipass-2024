@@ -1,23 +1,28 @@
 import LoginService from "../loginService.js";
 
-export default class BookService {
-    loginService = new LoginService()
-
-
-    registerBook(title, ISBN, firstName, middleName, lastName, notes) {
-        return fetch("../../api/books", {
+export default class LoanerService {
+    loginService = new LoginService();
+    registerLoaner(firstName, middleName, lastName, email, phoneNumber, houseNumber, streetName, townName, country, postalCode, notes) {
+        return fetch("../api/loaners", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + this.loginService.getCookie("token")
             },
             body: JSON.stringify({
-                title: title,
-                ISBN: ISBN,
-                author: {
+                name: {
                     firstName: firstName,
                     middleName: middleName,
                     lastName: lastName
+                },
+                email: email,
+                phoneNumber: phoneNumber,
+                address: {
+                  houseNumber: houseNumber,
+                  streetName: streetName,
+                  townName: townName,
+                  country: country,
+                  postalCode: postalCode
                 },
                 notes: notes
             })

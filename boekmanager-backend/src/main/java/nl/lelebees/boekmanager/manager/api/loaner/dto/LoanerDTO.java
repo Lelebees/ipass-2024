@@ -13,7 +13,7 @@ public record LoanerDTO(UUID id, Name name, Address address, String email, Strin
         return new LoanerDTO(loaner.getId(), loaner.getName(), loaner.getAddress(), loaner.getEmail(), loaner.getPhoneNumber(), loaner.getNotes());
     }
 
-    public static List<LoanerDTO> fromList(List<Loaner> loaners) {
+    public static List<LoanerDTO> from(List<Loaner> loaners) {
         List<LoanerDTO> result = new ArrayList<>();
         for (Loaner loaner : loaners) {
             result.add(LoanerDTO.from(loaner));

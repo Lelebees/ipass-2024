@@ -8,9 +8,9 @@ classDiagram
         -String title [get]
         -String notes [get]
         +isLoaned() bool
-        +isReserved() bool
+%%        +isReserved() bool
         +getLoaner() Loaner
-        +getFirstReserver() Loaner
+%%        +getFirstReserver() Loaner
     }
     Book "1" --o "0..1" Loan
 %%    ISBN "1" --* "1..*" Book
@@ -49,14 +49,14 @@ classDiagram
         +returnBook()
         +returnBook(LocalDateTime returnedAt)
     }
-    Book "1" --o "0..*" Reservation
-    Reservation "0..*" o-- "1" Loaner
-    class Reservation {
-        -UUID id [get]
-        -Book reservedBook [get]
-        -Loaner reserver [get]
-        -LocalDateTime reservedAt [get]
-    }
+%%    Book "1" --o "0..*" Reservation
+%%    Reservation "0..*" o-- "1" Loaner
+%%    class Reservation {
+%%        -UUID id [get]
+%%        -Book reservedBook [get]
+%%        -Loaner reserver [get]
+%%        -LocalDateTime reservedAt [get]
+%%    }
     class Loaner {
         -UUID id [get]
         -Name name [get]
@@ -64,8 +64,8 @@ classDiagram
         -String email [get]
         -String phoneNumber [get]
         -String notes [get]
-        +getLoans() List~Loan~
-        +getReservations() List~Reservation~
+%%        +getLoans() List~Loan~
+%%        +getReservations() List~Reservation~
     }
     Loaner "1..*" *-- "1" Address
     class Address {

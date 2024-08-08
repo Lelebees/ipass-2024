@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface LoanerRepository extends Repository<Loaner, UUID> {
     List<Loaner> getAllLoaners();
+
+    List<Loaner> getLoanersByName(String name);
 }

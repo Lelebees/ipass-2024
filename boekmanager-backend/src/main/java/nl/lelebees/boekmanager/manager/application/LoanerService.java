@@ -31,14 +31,18 @@ public class LoanerService {
     }
 
     public List<LoanerDTO> getAllLoaners() {
-        return LoanerDTO.fromList(repository.getAllLoaners());
+        return LoanerDTO.from(repository.getAllLoaners());
     }
 
-    private Loaner findLoaner(UUID id) throws LoanerNotFoundException {
+    public Loaner findLoaner(UUID id) throws LoanerNotFoundException {
         Optional<Loaner> loanerOptional = repository.findById(id);
         if (loanerOptional.isEmpty()) {
             throw new LoanerNotFoundException("Could not find Loaner with id: " + id);
         }
         return loanerOptional.get();
+    }
+
+    public List<LoanerDTO> getLoanersByName(String name){
+        return LoanerDTO.from(repository.getLoanersByName(name));
     }
 }
