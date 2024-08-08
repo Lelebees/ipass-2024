@@ -2,6 +2,7 @@ package nl.lelebees.boekmanager.manager.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import nl.lelebees.boekmanager.manager.domain.Entity;
 import org.glassfish.jersey.logging.LoggingFeature;
 
@@ -27,7 +28,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
         this.allTypes = allTypes;
         this.clazz = clazz;
         this.path = Paths.get(clazz.getSimpleName() + ".json");
-        this.mapper = new ObjectMapper().findAndRegisterModules();
+        this.mapper = new ObjectMapper();
         if (!Files.exists(path)) {
             logger.warning(clazz.getSimpleName() + ".json does not exist!");
             try {
@@ -58,8 +59,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
     public Type save(Type entity) {
         allTypes.add(entity);
         try {
-            String text = mapper.writeValueAsString(allTypes);
-            Files.writeString(path, text);
+            persistData();
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Could not save " + clazz.getSimpleName() + ". Something went wrong parsing to JSON.", e);
         } catch (IOException e) {
@@ -71,5 +71,17 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
     @Override
     public void delete(ID id) {
         allTypes.removeIf(type -> type.getId().equals(id));
+        try {
+            persistData();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Could not delete " + clazz.getSimpleName() + ". Something went wrong parsing to JSON.", e);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not delete " + clazz.getSimpleName() + ". Could not write to file.", e);
+        }
+    }
+
+    protected void persistData() throws IOException {
+        String text = mapper.writeValueAsString(allTypes);
+        Files.writeString(path, text);
     }
 }

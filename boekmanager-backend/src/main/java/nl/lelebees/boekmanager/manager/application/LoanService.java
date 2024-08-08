@@ -12,6 +12,7 @@ import nl.lelebees.boekmanager.manager.domain.loan.exception.LoanNotFoundExcepti
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 import nl.lelebees.boekmanager.manager.domain.loaner.exception.LoanerNotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -72,6 +73,10 @@ public class LoanService {
         if (loanOptional.isPresent()) {
             throw new BookAlreadyLoanedException("Book with id:" + dto.bookId() + " is already loaned to Loaner with id:" + loanOptional.get().getLoaner().getId() + " in Loan with id:" + loanOptional.get().getId());
         }
-        return LoanDTO.from(repository.save(new Loan(book, loaner, dto.loanedAt(), dto.toReturnAt(), null)));
+        return LoanDTO.from(repository.save(new Loan(book, loaner, dto.loanedAt().isEmpty() ? null : LocalDate.parse(dto.loanedAt()), dto.toReturnAt().isEmpty() ? null : LocalDate.parse(dto.toReturnAt()), null)));
+    }
+
+    public void deleteLoan(UUID loanId) {
+        repository.delete(loanId);
     }
 }

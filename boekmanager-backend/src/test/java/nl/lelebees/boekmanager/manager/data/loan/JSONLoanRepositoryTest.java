@@ -9,7 +9,7 @@ import nl.lelebees.boekmanager.manager.domain.name.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +23,7 @@ class JSONLoanRepositoryTest {
                 new Loan(
                         new Book("123456789X123", new Name("A", "van der", "A"), "Titel", "notities"),
                         new Loaner(new Name("A", "van der", "A"), new Address("1", "straat", "dorp", "land", "1234AB"), "a@a.com", "1234567890", "Notitie"),
-                        LocalDateTime.now().minusDays(3L), LocalDateTime.now(), null)
+                        LocalDate.now().minusDays(3L), LocalDate.now(), null)
         );
         assertEquals("123456789X123", loan.getBook().getISBN());
     }

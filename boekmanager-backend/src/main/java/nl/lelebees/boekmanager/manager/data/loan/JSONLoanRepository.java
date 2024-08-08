@@ -14,6 +14,7 @@ import nl.lelebees.boekmanager.manager.domain.loaner.exception.LoanerNotFoundExc
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,14 +31,13 @@ public class JSONLoanRepository extends JSONRepository<Loan, UUID> implements Lo
         List<Loan> types;
         try {
             String content = Files.readString(path);
-            logger.info(content);
             List<LoanDAO> daos = mapper.readValue(content, new TypeReference<>() {
             });
             types = new ArrayList<>();
             for (LoanDAO dao : daos) {
                 Book book = bookRepository.findById(dao.book()).orElseThrow(() -> new BookNotFoundException("Could not find Book with id: " + dao.book()));
                 Loaner loaner = loanerRepository.findById(dao.loaner()).orElseThrow(() -> new LoanerNotFoundException("Could not find Loaner with id:" + dao.loaner()));
-                types.add(new Loan(book, loaner, dao.loanedAt(), dao.toReturnAt(), dao.returnedAt()));
+                types.add(new Loan(dao.id(), book, loaner, dao.loanedAt() == null ? null : LocalDate.parse(dao.loanedAt()), dao.toReturnAt() == null ? null : LocalDate.parse(dao.toReturnAt()), dao.returnedAt() == null ? null : LocalDate.parse(dao.returnedAt())));
             }
         } catch (JsonProcessingException e) {
             System.out.println("Something went wrong parsing JSON for " + clazz.getSimpleName() + "!");
@@ -54,23 +54,15 @@ public class JSONLoanRepository extends JSONRepository<Loan, UUID> implements Lo
     }
 
     @Override
-    public Loan save(Loan entity) {
-        allTypes.add(entity);
-        try {
-            List<LoanDAO> daos = new ArrayList<>();
-            for (Loan type : allTypes) {
-                bookRepository.save(type.getBook());
-                loanerRepository.save(type.getLoaner());
-                daos.add(LoanDAO.from(type));
-            }
-            String text = mapper.writeValueAsString(daos);
-            Files.writeString(path, text);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Could not save " + clazz.getSimpleName() + ". Something went wrong parsing to JSON.", e);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not save " + clazz.getSimpleName() + ". Could not write to file.", e);
+    protected void persistData() throws IOException {
+        List<LoanDAO> daos = new ArrayList<>();
+        for (Loan type : allTypes) {
+            bookRepository.save(type.getBook());
+            loanerRepository.save(type.getLoaner());
+            daos.add(LoanDAO.from(type));
         }
-        return entity;
+        String text = mapper.writeValueAsString(daos);
+        Files.writeString(path, text);
     }
 
     @Override

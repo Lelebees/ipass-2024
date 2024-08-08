@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.UUID;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 import static javax.ws.rs.core.Response.Status.CONFLICT;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
@@ -87,5 +88,13 @@ public class LoanController {
         } catch (BookAlreadyLoanedException e) {
             return Response.status(CONFLICT).entity("Could not create Loan. The book with id:" + dto.bookId() + " is already loaned.").build();
         }
+    }
+
+    @DELETE
+    @Produces(TEXT_PLAIN)
+    @Path("/{loanId}")
+    public Response deleteLoan(@PathParam("loanId") UUID loanId) {
+        service.deleteLoan(loanId);
+        return Response.ok("Loan with id:" + loanId + " deleted successfully").build();
     }
 }

@@ -11,12 +11,6 @@ form {
     grid-row-gap: 3px;
 }
 
-h1 {
-    margin:auto;
-    text-align: center;
-    width: 99%;
-}
-
 body {
     display: grid;
     grid-template-rows: auto auto;

@@ -4,29 +4,29 @@ import nl.lelebees.boekmanager.manager.domain.Entity;
 import nl.lelebees.boekmanager.manager.domain.book.Book;
 import nl.lelebees.boekmanager.manager.domain.loaner.Loaner;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Loan extends Entity<UUID> {
     private Book book;
     private Loaner loaner;
-    private LocalDateTime loanedAt;
-    private LocalDateTime toReturnAt;
-    private LocalDateTime returnedAt;
+    private LocalDate loanedAt;
+    private LocalDate toReturnAt;
+    private LocalDate returnedAt;
 
-    public Loan(Book book, Loaner loaner, LocalDateTime loanedAt, LocalDateTime toReturnAt, LocalDateTime returnedAt) {
+    public Loan(Book book, Loaner loaner, LocalDate loanedAt, LocalDate toReturnAt, LocalDate returnedAt) {
         this(UUID.randomUUID(), book, loaner, loanedAt, toReturnAt, returnedAt);
     }
 
-    protected Loan(UUID id, Book book, Loaner loaner, LocalDateTime loanedAt, LocalDateTime toReturnAt, LocalDateTime returnedAt) {
+    public Loan(UUID id, Book book, Loaner loaner, LocalDate loanedAt, LocalDate toReturnAt, LocalDate returnedAt) {
         super(id);
         this.book = book;
         this.loaner = loaner;
-        if (loanedAt == null) {
-            throw new IllegalStateException("You must enter a date to loan the book at!");
-        }
         this.loanedAt = loanedAt;
-        if (toReturnAt.isBefore(loanedAt)) {
+        if (loanedAt == null) {
+            this.loanedAt = LocalDate.now();
+        }
+        if (toReturnAt != null && toReturnAt.isBefore(loanedAt)) {
             throw new IllegalStateException("Book cannot be returned before it is loaned!");
         }
         this.toReturnAt = toReturnAt;
@@ -38,14 +38,17 @@ public class Loan extends Entity<UUID> {
     }
 
     public boolean isLate() {
-        return toReturnAt.isAfter(LocalDateTime.now());
+        if (toReturnAt == null) {
+            return false;
+        }
+        return toReturnAt.isAfter(LocalDate.now());
     }
 
     public void returnBook() {
-        returnBook(LocalDateTime.now());
+        returnBook(LocalDate.now());
     }
 
-    public void returnBook(LocalDateTime returnedAt) {
+    public void returnBook(LocalDate returnedAt) {
         this.returnedAt = returnedAt;
     }
 
@@ -57,15 +60,15 @@ public class Loan extends Entity<UUID> {
         return loaner;
     }
 
-    public LocalDateTime getLoanedAt() {
+    public LocalDate getLoanedAt() {
         return loanedAt;
     }
 
-    public LocalDateTime getToReturnAt() {
+    public LocalDate getToReturnAt() {
         return toReturnAt;
     }
 
-    public LocalDateTime getReturnedAt() {
+    public LocalDate getReturnedAt() {
         return returnedAt;
     }
 }

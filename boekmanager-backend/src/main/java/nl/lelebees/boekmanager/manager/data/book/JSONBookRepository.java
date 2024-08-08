@@ -22,7 +22,6 @@ public class JSONBookRepository extends JSONRepository<Book, UUID> implements Bo
         List<Book> types;
         try {
             String content = Files.readString(path);
-            logger.info(content);
             types = mapper.readValue(content, new TypeReference<>() {
             });
         } catch (JsonProcessingException e) {

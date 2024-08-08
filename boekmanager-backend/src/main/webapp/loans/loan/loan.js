@@ -1,6 +1,8 @@
 import LoanService from "../loanService.js";
+import LoginService from "../../loginService.js";
 
 let loanService = new LoanService()
+let loginService = new LoginService()
 let selectBook = document.getElementById("bookInput")
 
 let selectLoaner = document.getElementById("loanerInput")
@@ -14,17 +16,18 @@ form.addEventListener('submit', e => {
         form.returnDate.value
     ).then(r => console.log("gelukt!"))
 })
-fetch("../api/books", {
+fetch("../../api/books", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + loginService.getCookie("token")
         }
     }
 ).then(response => {
     if (response.ok) {
         return response.json()
     }
-    throw new err
+    console.log("Not good! " + response.status + ": " + response.statusText)
 })
     .then(json => {
         for (const jsonKey in json) {
@@ -36,10 +39,11 @@ fetch("../api/books", {
         }
     })
 
-fetch("../api/loaners", {
+fetch("../../api/loaners", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + loginService.getCookie("token")
         }
     }
 ).then(response => {
