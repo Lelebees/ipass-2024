@@ -2,8 +2,8 @@ package nl.lelebees.boekmanager.manager.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import nl.lelebees.boekmanager.manager.domain.Entity;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Repository<Type, ID> {
     protected final List<Type> allTypes;
@@ -20,12 +21,15 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
     protected final ObjectMapper mapper;
     protected final Path path;
 
+    protected Logger logger = Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME);
+
     public JSONRepository(List<Type> allTypes, Class<Type> clazz) {
         this.allTypes = allTypes;
         this.clazz = clazz;
         this.path = Paths.get(clazz.getSimpleName() + ".json");
         this.mapper = new ObjectMapper().findAndRegisterModules();
         if (!Files.exists(path)) {
+            logger.warning(clazz.getSimpleName() + ".json does not exist!");
             try {
                 Files.createFile(path);
                 Files.writeString(path, "[]");
@@ -33,6 +37,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
                 throw new RuntimeException("Could not create File for saving " + clazz.getSimpleName() + "s: " + e.getMessage(), e);
             }
         }
+        logger.info("Found " + clazz.getSimpleName() + ".json");
     }
 
     public JSONRepository(Class<Type> clazz) {

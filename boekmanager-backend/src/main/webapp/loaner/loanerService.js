@@ -1,9 +1,13 @@
+import LoginService from "../loginService.js";
+
 export default class LoanerService {
+    loginService = new LoginService();
     registerLoaner(firstName, middleName, lastName, email, phoneNumber, houseNumber, streetName, townName, country, postalCode, notes) {
         return fetch("../api/loaners", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + this.loginService.getCookie("token")
             },
             body: JSON.stringify({
                 name: {

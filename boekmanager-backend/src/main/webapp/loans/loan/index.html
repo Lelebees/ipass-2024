@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boek Uitlenen</title>
+    <link rel="stylesheet" href="loan.css">
+</head>
+<body>
+<h1>Boek Uitlenen</h1>
+
+<form name="loanBook">
+    <label for="bookInput" class="bookLabel">Boek</label>
+<!--    <input id="bookInput" type="" class="bookInput" placeholder="Boek" required>-->
+    <select id="bookInput" class="bookInput" required>
+
+    </select>
+
+    <label for="loanerInput" class="loanerLabel">Lener</label>
+    <select id="loanerInput" class="loanerInput" required>
+
+    </select>
+
+    <label for="loanDate" class="loanDateLabel">Uitleendatum</label>
+    <input id="loanDate" class="loanDateInput" type="datetime-local">
+
+    <label for="returnDate" class="returnDateLabel">Inleverdatum</label>
+    <input id="returnDate" class="returnDateInput" type="date">
+
+    <input type="submit" class="submitButton" value="Leen Boek Uit">
+</form>
+
+<script src="loan.js" type="module"></script>
+<script src="../../kickIfNotLoggedIn.js" type="module"></script>
+</body>
+</html>

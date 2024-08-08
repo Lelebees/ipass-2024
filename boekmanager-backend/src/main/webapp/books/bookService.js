@@ -1,9 +1,15 @@
+import LoginService from "../loginService.js";
+
 export default class BookService {
+    loginService = new LoginService()
+
+
     registerBook(title, ISBN, firstName, middleName, lastName, notes) {
-        return fetch("../api/books", {
+        return fetch("../../api/books", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + this.loginService.getCookie("token")
             },
             body: JSON.stringify({
                 title: title,

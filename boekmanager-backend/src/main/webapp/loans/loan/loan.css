@@ -1,0 +1,62 @@
+form {
+    display: grid;
+    grid-template-areas:
+            "bookLabel bookInput bookInput "
+            "loanerLabel loanerInput loanerInput "
+            "loanDateLabel loanDateInput loanDateInput"
+            "returnDateLabel returnDateInput returnDateInput "
+            ". submit .";
+    width: 50%;
+    grid-column-gap: 3px;
+    grid-row-gap: 3px;
+}
+
+h1 {
+    margin:auto;
+    text-align: center;
+    width: 99%;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto auto;
+    place-items: center;
+    grid-gap: 5px;
+}
+
+.submitButton {
+    grid-area: submit;
+}
+
+.loanerLabel {
+    grid-area: loanerLabel;
+}
+
+.loanerInput{
+    grid-area: loanerInput;
+}
+
+.bookLabel {
+    grid-area: bookLabel;
+}
+
+.bookInput {
+    grid-area: bookInput;
+}
+
+.loanDateLabel {
+    grid-area: loanDateLabel;
+}
+
+.loanDateInput {
+    grid-area: loanDateInput;
+}
+
+.returnDateLabel {
+    grid-area: returnDateLabel;
+}
+
+.returnDateInput {
+    grid-area: returnDateInput;
+}
+

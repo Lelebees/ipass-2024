@@ -6,6 +6,7 @@ import nl.lelebees.boekmanager.manager.application.BookService;
 import nl.lelebees.boekmanager.manager.domain.book.exception.BookNotFoundException;
 import nl.lelebees.boekmanager.manager.domain.book.exception.NoTitleEnteredException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +18,7 @@ import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 @Path("/books")
+@RolesAllowed({"admin"})
 public class BookController {
 
     private final BookService service;

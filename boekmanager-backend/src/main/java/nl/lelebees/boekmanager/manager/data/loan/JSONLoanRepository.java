@@ -20,14 +20,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class JSONLoanRepository extends JSONRepository<Loan, UUID> implements LoanRepository {
-    private final JSONBookRepository bookRepository = new JSONBookRepository();
-    private final JSONLoanerRepository loanerRepository = new JSONLoanerRepository();
+    private final JSONBookRepository bookRepository;
+    private final JSONLoanerRepository loanerRepository;
 
     public JSONLoanRepository() {
         super(Loan.class);
+        this.bookRepository = new JSONBookRepository();
+        this.loanerRepository = new JSONLoanerRepository();
         List<Loan> types;
         try {
             String content = Files.readString(path);
+            logger.info(content);
             List<LoanDAO> daos = mapper.readValue(content, new TypeReference<>() {
             });
             types = new ArrayList<>();
@@ -88,6 +91,6 @@ public class JSONLoanRepository extends JSONRepository<Loan, UUID> implements Lo
 
     @Override
     public Optional<Loan> getLoanByBook(UUID bookId) {
-        return allTypes.stream().filter(loan -> loan.getId().equals(bookId)).findFirst();
+        return allTypes.stream().filter(loan -> loan.getBook().getId().equals(bookId)).findFirst();
     }
 }
