@@ -16,7 +16,7 @@ form.addEventListener('submit', e => {
         form.returnDate.value
     ).then(r => console.log("gelukt!"))
 })
-fetch("../../api/books", {
+fetch(window.location.origin + "/api/books", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ fetch("../../api/books", {
         }
     })
 
-fetch("../../api/loaners", {
+fetch(window.location.origin + "/api/loaners", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

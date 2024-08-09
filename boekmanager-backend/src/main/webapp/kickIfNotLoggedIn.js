@@ -3,10 +3,10 @@ import LoginService from "./loginService.js";
 let service = new LoginService()
 
 if (service.getCookie("token") == null || service.getCookie("token") === "") {
-    window.location.replace(window.location.origin + "/tomcat_app/login")
+    window.location.replace(window.location.origin + "/login")
 }
 
-fetch(window.origin +"/tomcat_app/api/authentication", {
+fetch(window.origin +"/api/authentication", {
     method: "GET",
     headers: {
         Authorization: "Bearer " + service.getCookie("token")
@@ -15,6 +15,6 @@ fetch(window.origin +"/tomcat_app/api/authentication", {
     if (response.status !== 200) {
         console.log(response)
         service.deleteCookie("token", "/")
-        window.location.replace(window.location.origin + "/tomcat_app/login")
+        window.location.replace(window.location.origin + "/login")
     }
 })

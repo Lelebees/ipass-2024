@@ -1,7 +1,7 @@
 export default class LoginService {
 
     login(username, password) {
-        return fetch("../api/authentication", {
+        return fetch(window.location.origin + "/api/authentication", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
