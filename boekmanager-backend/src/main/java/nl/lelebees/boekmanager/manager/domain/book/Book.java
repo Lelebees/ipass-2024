@@ -17,7 +17,7 @@ public class Book extends Entity<UUID> {
     private String title;
     private String notes;
 
-    protected Book(UUID id, String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
+    public Book(UUID id, String ISBN, Name author, String title, String notes) throws NoTitleEnteredException {
         super(id);
         this.ISBN = ISBN;
         this.author = author;
