@@ -4,7 +4,7 @@ export default class LoanService {
     loginService = new LoginService();
 
     loanBook(book, loaner, loanDate, returnDate) {
-        return fetch("../../api/loans", {
+        return fetch(window.location.origin + "/api/loans", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export default class LoanService {
     }
 
     getLoans() {
-        return fetch("../../api/loans", {
+        return fetch(window.location.origin + "/api/loans", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export default class LoanService {
     }
 
     returnBook(loanId) {
-        return fetch("../../api/loans/" + loanId, {
+        return fetch(window.location.origin + "/api/loans/" + loanId, {
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + this.loginService.getCookie("token")
