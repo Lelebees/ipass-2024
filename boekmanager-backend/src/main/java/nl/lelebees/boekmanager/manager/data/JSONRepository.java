@@ -10,13 +10,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
 
 public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Repository<Type, ID> {
-    protected final List<Type> allTypes;
+    protected final Set<Type> allTypes;
     protected final Class<Type> clazz;
 
     protected final ObjectMapper mapper;
@@ -24,7 +22,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
 
     protected Logger logger = Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME);
 
-    public JSONRepository(List<Type> allTypes, Class<Type> clazz) {
+    public JSONRepository(Set<Type> allTypes, Class<Type> clazz) {
         this.allTypes = allTypes;
         this.clazz = clazz;
         this.path = Paths.get(clazz.getSimpleName() + ".json");
@@ -42,7 +40,7 @@ public abstract class JSONRepository<Type extends Entity<ID>, ID> implements Rep
     }
 
     public JSONRepository(Class<Type> clazz) {
-        this(new ArrayList<>(), clazz);
+        this(new HashSet<>(), clazz);
     }
 
     @Override
